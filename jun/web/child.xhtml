@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>子ウィンドウから親ウィンドウに値を渡す</title>
+ 
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+ 
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body>
+    <div class="container">
+        <h1>子ウィンドウ</h1>
+ 
+        <p>
+            以下のメッセージを入力してボタンを押すと親ウィンドウに値が渡されます。<br />
+            この子ウィンドウも閉じます。
+        </p>
+ 
+        <div class="row">
+            <div class="col-md-12">
+                <form name="childfrm" action="" method="post">
+                    <div class="form-group">
+                        <input type="text" name="sub_input" id="inputText" value="" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <input type="button" onclick="setFormInput()" value="値を渡す" class="btn btn-success" />
+                    </div>
+                </form>
+            </div>
+        </div>
+ 
+    </div>
+ 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ 
+    <script type="text/javascript">
+        function setFormInput() {
+            // 親ウィンドウの存在チェック
+            if (!window.opener || window.opener.closed)
+            {
+                // 親ウィンドウが存在しない場合
+                window.alert('メインウィンドウが見当たりません。');
+            }
+            else
+            {
+                //window.opener.close();
+                //window.alert(window.opener);
+                window.opener.document.parentfrm.parent_input.value = document.getElementById("inputText").value;
+                window.close();
+            }
+        }
+    </script>
+ 
+</body>
+</html>
